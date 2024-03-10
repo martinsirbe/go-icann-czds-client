@@ -9,3 +9,7 @@ go-lint:
 		--workdir /src/github.com/martinsirbe/$(PROJECT_NAME) \
 		golangci/golangci-lint:$(GOLANGCI_LINT_VER) \
 		/bin/bash -c "golangci-lint run -v --config=/src/github.com/martinsirbe/$(PROJECT_NAME)/.golangci.yml"
+
+.PHONY: tests
+tests:
+	@go test -v -cover -race -coverprofile=coverage.txt -covermode=atomic ./...
