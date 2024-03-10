@@ -2,6 +2,7 @@ package czds
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -20,8 +21,8 @@ import (
 // The goal is to minimise token refetching by efficiently managing token expiration and renewal,
 // streamlining the authentication process.
 type TokenStore interface {
-	Save(token string) error
-	Get() string
+	Save(ctx context.Context, token string) error
+	Get(ctx context.Context) string
 }
 
 type authTransport struct {
@@ -33,7 +34,7 @@ type authTransport struct {
 }
 
 func (a *authTransport) RoundTrip(req *http.Request) (*http.Response, error) {
-	token := a.tokenStore.Get()
+	token := a.tokenStore.Get(req.Context())
 	if !isTokenValid(token) {
 		var err error
 		token, err = a.fetchJWT()
@@ -45,7 +46,7 @@ func (a *authTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 			return nil, fmt.Errorf("fetched JWT is not valid: %w", err)
 		}
 
-		if err := a.tokenStore.Save(token); err != nil {
+		if err := a.tokenStore.Save(req.Context(), token); err != nil {
 			return nil, fmt.Errorf("failed to store JWT: %w", err)
 		}
 	}
