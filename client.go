@@ -38,7 +38,9 @@ func NewClient(email, password string, opts ...ClientOption) *Client {
 	}
 
 	var tokenStore TokenStore
-	if options.tokenStore == nil {
+	if options.tokenStore != nil {
+		tokenStore = options.tokenStore
+	} else {
 		tokenStore = &InMemoryTokenStore{}
 	}
 
