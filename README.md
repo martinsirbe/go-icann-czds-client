@@ -1,4 +1,6 @@
 # ICANN CZDS client
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmartinsirbe%2Fgo-icann-czds-client.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmartinsirbe%2Fgo-icann-czds-client?ref=badge_shield)
+
 
 A client library for the Internet Corporation for Assigned Names and Numbers (ICANN) Centralized Zone Data Service (CZDS).
 The client aims to streamline the process of querying the CZDS to retrieve zone files and to list the Top-Level Domains (TLDs) 
@@ -94,6 +96,9 @@ Feel free to contribute to the project by submitting pull requests or creating i
 ## License
 
 This project is licensed under the MIT License. See [LICENSE.md](LICENSE.md).
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmartinsirbe%2Fgo-icann-czds-client.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmartinsirbe%2Fgo-icann-czds-client?ref=badge_large)
 
 ## Disclaimer
 
