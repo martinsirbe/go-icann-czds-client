@@ -20,7 +20,7 @@ func ICANNAccountsAPIBaseURL(baseURL string) ClientOption {
 	}
 }
 
-func CZDSAPIBaseURL(baseURL string) ClientOption {
+func APIBaseURL(baseURL string) ClientOption {
 	return func(opts *Options) {
 		opts.czdsAPIBaseURL = baseURL
 	}

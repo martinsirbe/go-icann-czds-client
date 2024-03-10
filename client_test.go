@@ -19,7 +19,8 @@ import (
 const (
 	testEmail     = "test-email"
 	testPassword  = "test-password"
-	testGoodToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik1hcnRpbnMgSXJiZSIsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjo4ODg4ODg4ODg4OH0.NPp6gHGl-DFrD6Bk5VGd2VcTFCcKztecm4d3U2AR_yk"
+	testGoodToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik1hcn" +
+		"RpbnMgSXJiZSIsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjo4ODg4ODg4ODg4OH0.NPp6gHGl-DFrD6Bk5VGd2VcTFCcKztecm4d3U2AR_yk"
 )
 
 func TestGetZoneFile(t *testing.T) {
@@ -208,7 +209,8 @@ test-3.com.	10800	in	ns	test-dns-4.com.`))
 					require.Equal(t, reqBody.Username, testEmail)
 					require.Equal(t, reqBody.Password, testPassword)
 
-					const expiredToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik1hcnRpbnMgSXJiZSIsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjo4ODg4ODg4OH0.f1MBGBBvza_-DLyoXv_oujVZfQWoOEFyC4-I0_0MZQQ"
+					const expiredToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik1hcn" +
+						"RpbnMgSXJiZSIsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjo4ODg4ODg4OH0.f1MBGBBvza_-DLyoXv_oujVZfQWoOEFyC4-I0_0MZQQ"
 					testResponse := fmt.Sprintf(`{"accessToken":%q,"message":"Authentication Successful"}`, expiredToken)
 					_, err := w.Write([]byte(testResponse))
 					require.NoError(t, err)
@@ -266,7 +268,7 @@ test-3.com.	10800	in	ns	test-dns-4.com.`))
 
 			client := czds.NewClient(testEmail, testPassword,
 				czds.ICANNAccountsAPIBaseURL(mockAccountsAPI.URL),
-				czds.CZDSAPIBaseURL(mockCZDSAPI.URL))
+				czds.APIBaseURL(mockCZDSAPI.URL))
 
 			records, err := client.GetZoneFile(context.Background(), "com")
 			tc.errAssert(t, err)
@@ -411,7 +413,7 @@ func TestListTLDs(t *testing.T) {
 
 			client := czds.NewClient(testEmail, testPassword,
 				czds.ICANNAccountsAPIBaseURL(mockAccountsAPI.URL),
-				czds.CZDSAPIBaseURL(mockCZDSAPI.URL))
+				czds.APIBaseURL(mockCZDSAPI.URL))
 
 			tlds, err := client.ListTLDs(context.Background())
 			tc.errAssert(t, err)

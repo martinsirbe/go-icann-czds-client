@@ -109,11 +109,7 @@ func (c *Client) GetZoneFile(ctx context.Context, tld string) (map[string][]stri
 		if len(parts) > 1 {
 			domain := parts[0]
 			record := strings.Join(parts[1:], ",")
-			if _, exists := domainMap[domain]; exists {
-				domainMap[domain] = append(domainMap[domain], record)
-			} else {
-				domainMap[domain] = []string{record}
-			}
+			domainMap[domain] = append(domainMap[domain], record)
 		}
 	}
 
