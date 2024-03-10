@@ -1,0 +1,19 @@
+name: Codecov
+on: [push, pull_request]
+jobs:
+  build:
+    name: Check test coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.22
+      - name: Test & Coverage
+        run: go test ./... -coverprofile=coverage.txt
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: martinsirbe/go-icann-czds-client
